@@ -1,6 +1,11 @@
 FROM ubuntu:xenial
 
-# gcc for cgo
+# Based on https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/docker
+
+# maintener info
+MAINTAINER Lukasz Pyrzyk <lukasz.pyrzyk@gmail.com>, Jakub Bentkowski <bentkowski.jakub@gmail.com>
+
+# Update and install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		g++ \
 		gcc \
@@ -38,14 +43,6 @@ RUN pip --no-cache-dir install \
         sklearn \
         && \
     python -m ipykernel.kernelspec
-
-# Set up our notebook config.
-#COPY jupyter_notebook_config.py /root/.jupyter/
-
-# Jupyter has issues with being run directly:
-#   https://github.com/ipython/ipython/issues/7062
-# We just add a little wrapper script.
-#COPY run_jupyter.sh /
 
 # Set up Bazel.
 
